@@ -20,7 +20,7 @@
 #import "NimbusCore.h"
 
 const NSInteger NIPhotoAlbumScrollViewUnknownNumberOfPhotos = -1;
-const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 10;
+const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 0;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,8 +240,8 @@ const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 10;
                                            isLoading: &isLoading
                              originalPhotoDimensions: &originalPhotoDimensions];
 
-  page.photoDimensions = originalPhotoDimensions;
-
+  page.photoDimensions = originalPhotoDimensions;    
+    
   if (nil == image) {
     page.zoomingIsEnabled = NO;
     [page setImage:self.loadingImage photoSize:NIPhotoScrollViewPhotoSizeUnknown];
@@ -284,6 +284,9 @@ const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 10;
     page = [[[NIPhotoScrollView alloc] init] autorelease];
     page.photoScrollViewDelegate = self;
     page.zoomingAboveOriginalSizeIsEnabled = [self isZoomingAboveOriginalSizeEnabled];
+    
+    //set background of Photo Scroll View
+    page.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BG01_PATTERN.png"]];
   }
 
   // This will only be called once each time the page is shown.
