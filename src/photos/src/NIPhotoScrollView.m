@@ -404,7 +404,7 @@
                                                      action: @selector(didDoubleTap:)];
 
     // I freaking love gesture recognizers.
-    [_doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [_doubleTapGestureRecognizer setNumberOfTapsRequired:1];
 
     [self addGestureRecognizer:_doubleTapGestureRecognizer];
   }
