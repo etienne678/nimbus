@@ -15,7 +15,7 @@
 //
 
 #import "NICellFactory.h"
-
+#import "PDBorderTableViewCell.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,8 +34,19 @@
   if ([object respondsToSelector:@selector(cellClass)]) {
     Class cellClass = [object cellClass];
     NSString* identifier = NSStringFromClass(cellClass);
-
-    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    // DISABLED DEQUEUE BECAUSE OF BORDERS FOR NOW
+    /* 
+     nimbus cell factory uses the cell class name as dequeue identifier. that means that
+     if i want to use dequeuing, every type of cell (backgroundcolor / border setting) needs to be a class of it's own.
+     that is not the case currently, because in the tableViewController, i add background and border setting after the factory returned a dequeued cell.
+     that means that those changes are made to all the cells and not just the one i want to.
+     possible solutions:
+     - make one cell class for every style
+     - clean up cell in prepareForReuse method
+     - disable dequeuing in nimbus cell factory
+    */
+    //cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 
     if (nil == cell) {
       UITableViewCellStyle style = UITableViewCellStyleDefault;
@@ -44,10 +55,21 @@
       }
       cell = [[[cellClass alloc] initWithStyle:style reuseIdentifier:identifier] autorelease];
     }
+      
+    else{
+        //cell was dequeued
+        DLog(@"\n--- cell was dequeued with identifier: %@ ---",identifier);
+    }
 
     // Allow the cell to configure itself with the object's information.
-    if ([cell respondsToSelector:@selector(shouldUpdateCellWithObject:)]) {
-      [(id<NICell>)cell shouldUpdateCellWithObject:object];
+      
+      //first see if cell is a PDBorderTableViewCell:
+      if ([cell respondsToSelector:@selector(shouldUpdateCellWithObject:andIndexPath:andCellRect:)]) {
+          [(id)cell shouldUpdateCellWithObject:object andIndexPath:indexPath andCellRect:[tableView rectForRowAtIndexPath:indexPath]];
+      }
+      //if not, call normal NICell Method
+      else if ([cell respondsToSelector:@selector(shouldUpdateCellWithObject:)]) {
+          [(id<NICell>)cell shouldUpdateCellWithObject:object];
     }
   }
 
