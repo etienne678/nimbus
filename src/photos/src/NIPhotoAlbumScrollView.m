@@ -73,7 +73,7 @@ const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 0;
     _pagingScrollView.delegate = self;
 
     // Ensure that empty areas of the scroll view are draggable.
-    _pagingScrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BG01_PATTERN.png"]];
+    _pagingScrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg01Pattern.png"]];
 
     _pagingScrollView.showsVerticalScrollIndicator = NO;
     _pagingScrollView.showsHorizontalScrollIndicator = NO;
@@ -286,7 +286,7 @@ const CGFloat NIPhotoAlbumScrollViewDefaultPageHorizontalMargin = 0;
     page.zoomingAboveOriginalSizeIsEnabled = [self isZoomingAboveOriginalSizeEnabled];
     
     //set background of Photo Scroll View
-    page.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BG01_PATTERN.png"]];
+    page.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg01Pattern.png"]];
   }
 
   // This will only be called once each time the page is shown.
