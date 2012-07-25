@@ -125,7 +125,7 @@
     }
     // Add "Cancel" button except for iPads
     if (!NIIsPad()) {
-      [_actionSheet setCancelButtonIndex:[_actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")]];
+      [_actionSheet setCancelButtonIndex:[_actionSheet addButtonWithTitle:NSLocalizedString(NSLocalizedString(@"cancel", nil), @"")]];
     }
   }
 
@@ -298,7 +298,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webViewDidStartLoad:(UIWebView*)webView {
 
-  self.title = NSLocalizedString(@"Loading...", @"");
+  self.title = NSLocalizedString(NSLocalizedString(@"loading_sign_text", nil), @"");
   if (!self.navigationItem.rightBarButtonItem) {
     [self.navigationItem setRightBarButtonItem:_activityItem animated:YES];
   }
